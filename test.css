@@ -224,14 +224,17 @@ section03 uxui*/
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 35px;
+    gap: 25px;
 }
 .content-text {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  width: 40%;
   color: #000000;
   text-align: center;
   font-family: "Inter-Medium", sans-serif;
   font-size: 22px;
-  font-weight: 500;
+  font-weight: 400;
 }
 .content-title {
   color: #000000;
@@ -254,17 +257,19 @@ section03 uxui*/
   transform: scale(1.1); /* hover 시 10% 확대 */
 }
 ._01, ._02, ._03, ._04 {
+  margin-bottom: 10px;
   color: #000000;
   text-align: left;
   font-family: "Inter-Medium", sans-serif;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 500;
 }
 .div {
+  margin-top: 20px;
   color: #000000;
   text-align: left;
   font-family: "Inter-Bold", sans-serif;
-  font-size: 30px;
+  font-size: 28px;
   font-weight: 700;
 }
 .div2 {
@@ -364,10 +369,7 @@ section03 uxui*/
 
 section02 */
 /* .s2box{
-  display: flex;
-  justify-content: center;
-  align-items: center;    
-  height: 100vh;  
+  border: 1px solid red;
 } */
 
 .s2-top{
@@ -380,8 +382,8 @@ section02 */
 }
 
 .first-right-side {
+  
   width: 312.24px;
-  height: 511.56px;
   display: flex;
   flex-direction: column;
   align-items: center;

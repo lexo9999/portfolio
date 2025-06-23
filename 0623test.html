@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  .tooltip {
+    position: fixed;
+    padding: 4px 8px;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    font-size: 12px;
+    border-radius: 4px;
+    pointer-events: none; /* 툴팁 위에 마우스를 올려도 이벤트 무시 */
+  }
+</style>
+</head>
+<body>
+  <div class="tooltip" id="tooltip">여기에 글자</div>
+  <script>
+    const tooltip = document.getElementById('tooltip'); // 툴팁 div 선택
+    document.addEventListener('mousemove', (e) => {
+      tooltip.style.left = e.clientX + 12 + 'px'; // X좌표를 마우스 커서보다 오른쪽 12px로 지정
+      tooltip.style.top = e.clientY + 12 + 'px';  // Y좌표를 마우스 커서보다 아래 12px로 지정
+    });
+  </script>
+</body>
+</html>
