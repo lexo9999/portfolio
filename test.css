@@ -28,7 +28,7 @@ ul {
 
 
   body{
-  background: linear-gradient(180deg, #4e54c88e 0%, #8f94fb00 100%);
+  background: linear-gradient(180deg, #5e768f8e 0%, #8f94fb00 100%);
   width: 100%;
   /* 두 섹션의 높이를 합친 만큼 높이 지정 (예시: 200vh) */
   height: 100%;
@@ -91,12 +91,18 @@ section {
 }
 
   .top-button {
+
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
     position: fixed;
-    bottom: 120px;
-    right: 20px;
+    bottom: 135px;
+    right: 30px;
     width: 80px;
     height: 80px;
-    font-size: 16px;
+    font-size: 14px;
     background-color: #ffffff;
     border: none;
     border-radius: 5px;
@@ -105,7 +111,7 @@ section {
     transition: opacity 0.5s ease;
     z-index: 1000;
 
-    border-radius: 100%;
+    border-radius: 30%;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -114,15 +120,20 @@ section {
 }
 
 .contact-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 40px;
+    right: 30px;
     width: 80px;
     height: 80px;
     font-size: 16px;
     background-color: #ffffff;
     border: none;
-    border-radius: 100%;
+    border-radius: 30%;
     cursor: pointer;
     opacity: 0; /* 기본적으로 숨김 */
     transition: opacity 0.5s ease;
@@ -193,16 +204,21 @@ section01*/
   font-weight: 700;
 }
 
-.mainContact {
+.mainContact{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
     margin-top: 100px;
   color: #000000;
   text-align: center;
   font-family: "Inter-Regular", sans-serif;
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 400;
-  background-color: rgb(227, 227, 227);
+  background-color: rgb(255, 255, 255);
   border-radius: 50px;
-  padding: 10px 40px;
+  padding: 15px 60px;
+  box-shadow: white 0px 0px 10px;
 }
 
 
@@ -237,8 +253,10 @@ section03 uxui*/
   color: #000000;
   text-align: center;
   font-family: "Inter-Medium", sans-serif;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: -0.2px;
 }
 .content-title {
   color: #000000;
@@ -306,19 +324,40 @@ section03 uxui*/
 
 모달 스타일 추가 */
 .modal {
-  position: fixed; left: 0; top: 0; width: 100vw; height: 100vh;
-  background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; z-index: 9999;
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
 }
+
 .modal-content {
-  background: #fff; padding: 40px 60px; border-radius: 16px; position: relative;
-  width: 1500px;
-  height: 700px;
-  display: flex; flex-direction: row; align-items: stretch; gap: 40px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  position: relative;
+  margin: 10% auto;
+  padding: 20px;
+  width: 80%;
+  max-width: 700px;
+  min-width: 400px; /* 최소 가로 크기 */
+  min-height: 300px; /* 최소 세로 크기 */
+  background: #fff;
+  border-radius: 10px;
+  text-align: center;
 }
+
 .close {
-  position: absolute; top: 18px; right: 28px; font-size: 32px; cursor: pointer; z-index: 2;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 30px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
 }
+
 .modal-prev, .modal-next {
   position: absolute; top: 50%; transform: translateY(-50%);
   background: none; border: none; font-size: 2.5em; cursor: pointer; color: #888;
@@ -326,35 +365,64 @@ section03 uxui*/
 }
 .modal-prev { left: 10px; }
 .modal-next { right: 10px; }
+.modal-body {
+  display: flex;
+  align-items: center; /* 세로 가운데 정렬 */
+  justify-content: space-between; /* 좌우로 배치 */
+  gap: 20px;
+  height: 100%; /* 부모 요소의 높이를 채움 */
+}
+
 .modal-desc-wrap {
-  flex: 1 1 0; display: flex; flex-direction: column; justify-content: center;
-  padding-right: 10px;
+  flex: 1;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 세로 가운데 정렬 */
 }
-.modal-title { font-weight: bold; font-size: 1.5em; margin-bottom: 18px; }
-.modal-desc { 
-  color: #222;           /* 글자색 */
-  font-size: 1.15em;     /* 글자 크기 */
-  line-height: 1.8;      /* 줄간격 */
-  font-family: '맑은 고딕', 'Malgun Gothic', Arial, sans-serif; /* 폰트 */
-  margin-bottom: 20px;   /* 아래 여백 */
-  /* 원하는 스타일 추가 */
-}
+
 .modal-image {
-  flex: 1 1 0; display: flex; align-items: center; justify-content: center;
-  min-width: 320px; min-height: 240px; max-width: 800px; max-height: 800px;
-  background: #f3f3f3; border-radius: 10px; overflow: hidden;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* 세로 가운데 정렬 */
 }
+
 .modal-image img {
-  width: 100%; height: auto; max-height: 350px; object-fit: contain;
+  width: 100%;
+  height: auto;
+  max-width: 400px; /* 정사각형 크기 */
+  max-height: 400px; /* 정사각형 크기 */
+  object-fit: cover; /* 이미지 비율 유지 */
+  border-radius: 10px; /* 모서리 둥글게 */
 }
 
+.modal .prev-arrow,
+.modal .next-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: none;
+  font-size: 24px;
+  padding: 10px 20px;
+  cursor: pointer;
+  z-index: 1001;
+}
 
+.modal .prev-arrow {
+  left: 10px;
+}
 
+.modal .next-arrow {
+  right: 10px;
+}
 
-
-
-
-
+.modal .prev-arrow:hover,
+.modal .next-arrow:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
 
 /* 
 
@@ -395,7 +463,7 @@ section02 */
 }
 
 .s-2 {
-  margin-top: 35px;
+  margin-top: 32px;
   color: #000000;
   text-align: right;
   font-family: "Inter-SemiBold", sans-serif;
@@ -403,7 +471,7 @@ section02 */
   font-weight: 600;
 }
 .s-2-01051853244 {
-  margin-top: 20px;
+  margin-top: 15px;
   color: #000000;
   text-align: right;
   font-family: "Inter-Medium", sans-serif;
@@ -428,8 +496,8 @@ section02 */
   color: #000000;
   text-align: left;
   font-family: "Inter-SemiBold", sans-serif;
-  font-size: 72px;
-  line-height: 120px;
+  font-size: 68px;
+  line-height: 1.5;
   font-weight: 600;
 }
 
@@ -439,7 +507,7 @@ section02 */
 
 
 .tools-top{
-  margin-top: px;
+  margin-top: 20px;
   margin-left: 200px;
   justify-content: space-between;
   width: 80%;
@@ -451,14 +519,14 @@ section02 */
   color: #000000;
   text-align: right;
   font-family: "Inter-SemiBold", sans-serif;
-  font-size: 30.964323043823242px;
-  font-weight: 600;
+  font-size: 24px;
+  font-weight: 500;
 }
 .line-1, .line-2 {
   margin-top: -2px;
   border-style: solid;
-  border-color: #d6d6d6;
-  border-width: 2px 0 0 0;
+  border-color: #ffffffcc;
+  border-width: 1.5px 0 0 0;
   width: 659.71px;
   height: 0px;
 }
@@ -482,6 +550,8 @@ section02 */
   height: 81.15px;
 }
 .tool-text-01 {
+  margin-top: 15px;
+  margin-bottom: 10px;
   color: #000000;
   text-align: left;
   font-family: "Inter-Medium", sans-serif;
@@ -492,14 +562,15 @@ section02 */
   color: #000000;
   text-align: left;
   font-family: "Inter-Light", sans-serif;
-  font-size: 9.858969688415527px;
+  font-size: 12px;
   font-weight: 300;
 }
 .tool-text-03 {
+  margin-top: 4px;
   color: #000000;
   text-align: left;
   font-family: "Inter-Light", sans-serif;
-  font-size: 9.858969688415527px;
+  font-size: 12px;
   font-weight: 300;
 }
 
@@ -510,4 +581,96 @@ section02 */
   width: 70%;
   margin-top: 50px;
 
+}
+
+
+.section08_box {
+  margin: auto;
+  width: 70%;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.section08_text{
+  font-size: 20px;
+  line-height: 1.6;
+}
+.contact_button {
+
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  
+  margin-top: 220px;
+  margin-bottom: 40px;
+color: #000000;
+text-align: center;
+font-family: "Inter-Regular", sans-serif;
+font-size: 26px;
+font-weight: 400;
+background-color: rgb(255, 255, 255);
+border-radius: 50px;
+padding: 15px 60px;
+box-shadow: white 0px 0px 10px;
+}
+
+.floating-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* 클릭 방지 */
+    overflow: hidden;
+    z-index: -1; /* 배경으로 이동 */
+}
+
+.floating-item {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.5); /* 반투명 흰색 */
+    border-radius: 50%;
+    animation: float 10s infinite ease-in-out;
+    box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.3); /* 블러 효과 */
+}
+
+/* 랜덤 위치 설정 */
+.floating-item:nth-child(1) {
+    top: 20%;
+    left: 10%;
+    animation-duration: 12s;
+}
+
+.floating-item:nth-child(2) {
+    top: 50%;
+    left: 30%;
+    animation-duration: 15s;
+}
+
+.floating-item:nth-child(3) {
+    top: 80%;
+    left: 70%;
+    animation-duration: 18s;
+}
+
+/* 부드럽게 떠다니는 애니메이션 */
+@keyframes float {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+    25% {
+        transform: translate(-30px, 20px) scale(1.2);
+    }
+    50% {
+        transform: translate(30px, -20px) scale(0.8);
+    }
+    75% {
+        transform: translate(-20px, -30px) scale(1.1);
+    }
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
 }

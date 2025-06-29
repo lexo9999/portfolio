@@ -102,92 +102,108 @@ topButton.addEventListener('click', () => {
     updateActiveNavLink(); // 활성화된 네비게이션 링크 업데이트
 });
 
-const projects = [
-  {
-    image: 'img01.jpg',
-    desc1: 'UX/UI',
-    title: '프로젝트 이름',
-    desc2: '(세부적인) 분야',
-    desc3: '2025.3-2025.6',
-    desc4: '개요',
-    desc5: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. ',
-    desc6: '세부설명',
-    desc7: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. '
-  },
-  {
-    image: 'img02.jpg',
-    title: '프로젝트 이름 2',
-    desc: '(세부적인) 분야 2\n이곳에 프로젝트에 대한 자세한 설명을 입력하세요.'
-  },
-  {
-    image: 'img03.jpg',
-    title: '프로젝트 이름 3',
-    desc: '(세부적인) 분야 3\n이곳에 프로젝트에 대한 자세한 설명을 입력하세요.'
-  },
-  {
-    image: 'img04.jpg',
-    title: '프로젝트 이름 4',
-    desc: '(세부적인) 분야 4\n이곳에 프로젝트에 대한 자세한 설명을 입력하세요.'
-  }
-];
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("projectModal");
+  const modalImage = document.getElementById("modalImage");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalSubtitle = document.getElementById("modalSubtitle");
+  const modalDesc = document.getElementById("modalDesc");
+  const closeModal = document.querySelector(".close");
+  const prevArrow = document.querySelector(".prev-arrow");
+  const nextArrow = document.querySelector(".next-arrow");
 
-const modal = document.getElementById('projectModal');
-const modalImage = modal.querySelector('.modal-image');
-const modalTitle = modal.querySelector('.modal-title');
-const modalDesc = modal.querySelector('.modal-desc');
-const closeBtn = modal.querySelector('.close');
-const prevBtn = modal.querySelector('.modal-prev');
-const nextBtn = modal.querySelector('.modal-next');
+  let currentIndex = 0; // 현재 표시 중인 이미지의 인덱스
+  const pictureBoxes = Array.from(
+    document.querySelectorAll("[class^='pictureBox-rectangle']")
+  );
 
-let currentIdx = 0;
+  // 모달 열기
+  const openModal = (index) => {
+    const element = pictureBoxes[index];
+    const imageSrc = element.getAttribute("data-image");
+    const title = element.getAttribute("data-title");
+    const subtitle = element.getAttribute("data-subtitle");
+    const desc = element.getAttribute("data-desc");
 
-function showModal(idx) {
-  currentIdx = idx;
-  const project = projects[idx];
-  modalImage.innerHTML = `<img src="${project.image}" alt="${project.title}">`;
-  modalTitle.textContent = project.title;
+    // 모달에 데이터 삽입
+    modalImage.src = imageSrc;
+    modalTitle.textContent = title;
+    modalSubtitle.textContent = subtitle;
+    modalDesc.innerHTML = desc;
 
-  // desc, desc2, desc3 등 모든 desc 속성을 배열로 모아서 출력
-  let descHtml = '';
-  Object.keys(project).forEach(key => {
-    if (key.startsWith('desc')) {
-      // desc4, desc6만 굵게
-      if (key === 'desc4' || key === 'desc6') {
-        descHtml += `<div style="margin-bottom:10px; font-weight:bold;">${project[key].replace(/\n/g, '<br>')}</div>`;
-      } else {
-        descHtml += `<div style="margin-bottom:10px;">${project[key].replace(/\n/g, '<br>')}</div>`;
-      }
+    // 모달 표시
+    modal.style.display = "block";
+    currentIndex = index;
+  };
+
+  // 모달 닫기
+  const closeModalHandler = () => {
+    modal.style.display = "none";
+  };
+
+  // 이전 사진으로 이동
+  const showPrev = () => {
+    currentIndex = (currentIndex - 1 + pictureBoxes.length) % pictureBoxes.length;
+    openModal(currentIndex);
+  };
+
+  // 다음 사진으로 이동
+  const showNext = () => {
+    currentIndex = (currentIndex + 1) % pictureBoxes.length;
+    openModal(currentIndex);
+  };
+
+  // 모든 pictureBox-rectangle 요소에 클릭 이벤트 추가
+  pictureBoxes.forEach((element, index) => {
+    element.addEventListener("click", () => openModal(index));
+  });
+
+  // 화살표 및 닫기 버튼 이벤트 추가
+  closeModal.addEventListener("click", closeModalHandler);
+  prevArrow.addEventListener("click", showPrev);
+  nextArrow.addEventListener("click", showNext);
+
+  // 모달 외부 클릭 시 닫기
+  window.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      closeModalHandler();
     }
   });
-  modalDesc.innerHTML = descHtml;
-
-  modal.style.display = 'flex';
-}
-
-function hideModal() {
-  modal.style.display = 'none';
-}
-
-function showPrev() {
-  showModal((currentIdx + projects.length - 1) % projects.length);
-}
-
-function showNext() {
-  showModal((currentIdx + 1) % projects.length);
-}
-
-document.querySelector('.pictureBox-rectangle01').addEventListener('click', () => showModal(0));
-document.querySelector('.pictureBox-rectangle02').addEventListener('click', () => showModal(1));
-document.querySelector('.pictureBox-rectangle03').addEventListener('click', () => showModal(2));
-document.querySelector('.pictureBox-rectangle04').addEventListener('click', () => showModal(3));
-
-closeBtn.onclick = hideModal;
-prevBtn.onclick = showPrev;
-nextBtn.onclick = showNext;
-
-modal.addEventListener('click', function(e) {
-  if (e.target === modal) hideModal();
 });
+
+// Floating 요소 생성 및 추가
+function createFloatingElements() {
+    const floatingContainer = document.createElement('div');
+    floatingContainer.classList.add('floating-container');
+
+    // 동그라미 6개 생성
+    for (let i = 0; i < 6; i++) { 
+        const floatingItem = document.createElement('div');
+        floatingItem.classList.add('floating-item');
+
+        // 랜덤 크기 설정 (최소 30px ~ 최대 100px)
+        const size = Math.random() * 70 + 30; // 30 ~ 100px
+        floatingItem.style.width = `${size}px`;
+        floatingItem.style.height = `${size}px`;
+
+        // 랜덤 위치 설정
+        floatingItem.style.top = `${Math.random() * 100}%`;
+        floatingItem.style.left = `${Math.random() * 100}%`;
+
+        // 랜덤 애니메이션 속도 설정 (8초 ~ 20초)
+        floatingItem.style.animationDuration = `${8 + Math.random() * 12}s`;
+
+        // 랜덤 애니메이션 딜레이 설정
+        floatingItem.style.animationDelay = `${Math.random() * 5}s`;
+
+        floatingContainer.appendChild(floatingItem);
+    }
+
+    document.body.appendChild(floatingContainer);
+}
+
+// 페이지 로드 시 floating 요소 추가
+window.addEventListener('DOMContentLoaded', createFloatingElements);
 
 
 
